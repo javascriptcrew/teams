@@ -3,8 +3,8 @@ import http from 'http';
 import nodeStatic from 'node-static';
 
 
-const bare =  new Server('/bare/', '');
-const serve = new nodeStatic.Server('static1/');
+const bare = new Server('/bare/', '');
+const serve = new nodeStatic.Server('site/');
 
 const server = http.createServer();
 
@@ -14,8 +14,8 @@ server.on('request', (request, response) => {
 });
 
 server.on('upgrade', (req, socket, head) => {
-	if(bare.route_upgrade(req, socket, head))return;
-	socket.end();
+    if (bare.route_upgrade(req, socket, head)) return;
+    socket.end();
 });
 
 server.listen(process.env.PORT || 8080);
